@@ -11,6 +11,7 @@ global modelItemFolder
 global modelBlockFolder
 global modelsFolder
 
+tk = Tk()
 opts = jsbeautifier.default_options()
 opts.indent_size = 4
 
@@ -26,12 +27,13 @@ def checkFolder(path, isCritical = True, createFolder = False):
                 print(f"Creating missing {folder} folder at '{path.parent.name}.")
                 path.mkdir()
 
-tempFolder = Path(Tk().clipboard_get())
+tempFolder = Path(tk.clipboard_get())
 if (not tempFolder.exists() or tempFolder.name != 'resources'):
     print('Copy the absolute path of the resources folder from where you want to convert the models.')
     while(not tempFolder.exists() or tempFolder.name != 'resources'):
         time.sleep(0.1)
-        tempFolder = Path(Tk().clipboard_get())
+        tempFolder = Path(tk.clipboard_get())
+tk.destroy()
 
 parentFolder = tempFolder
 metainfFolder = parentFolder.joinpath("META-INF")
